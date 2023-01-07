@@ -36,7 +36,36 @@ class WithdrawUseCaseHandlerTest {
     private User user;
     private BigDecimal amount;
 
+    @BeforeEach
+    void init() {
+        handler = new WithdrawUseCaseHandler(accountPort);
+    }
 
+    @Test
+    void apply_shouldDoNothing_whenUserHasNoAccount() {
+        givenUser();
+        givenUserHasNoAccount();
+        whenApplyIsInvoked();
+        thenNoAccountUpdated();
+    }
 
+    private void givenUser() {
+        user = user1();
+    }
+
+    private User user1() {
+        return new User("user1");
+    }
+
+    private void givenUserHasNoAccount() {
+        given(accountPort.getAccount(any(User.class))).willReturn(Optional.empty());
+    }
+    private void whenApplyIsInvoked() {
+        handler.apply(user, amount);
+    }
+
+    private void thenNoAccountUpdated() {
+        verify(accountPort, never()).saveAccount(any(Account.class));
+    }
 
 }
