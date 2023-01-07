@@ -14,6 +14,7 @@ public class HistoryAccountHandlerTest {
     @Test
     void apply_shouldReturnSortedOperations_whenUserHasOperations() {
         givenUser();
+        whenApplyIsInvoked();
     }
 
     private void givenUser() {
