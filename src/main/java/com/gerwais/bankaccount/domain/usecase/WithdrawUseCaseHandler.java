@@ -24,5 +24,9 @@ public class WithdrawUseCaseHandler implements WithdrawUseCase {
         Optional<Account> account = accountPort.getAccount(user);
         if(account.isEmpty())
             return;
+
+        var newBalance = account.get().getBalance().subtract(amount);
+        var newAccount = new Account(now(), amount, newBalance, user);
+        accountPort.saveAccount(newAccount);
     }
 }
