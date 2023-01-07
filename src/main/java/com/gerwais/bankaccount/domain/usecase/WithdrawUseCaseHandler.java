@@ -21,6 +21,8 @@ public class WithdrawUseCaseHandler implements WithdrawUseCase {
 
     @Override
     public void apply(User user, BigDecimal amount) {
-
+        Optional<Account> account = accountPort.getAccount(user);
+        if(account.isEmpty())
+            return;
     }
 }
