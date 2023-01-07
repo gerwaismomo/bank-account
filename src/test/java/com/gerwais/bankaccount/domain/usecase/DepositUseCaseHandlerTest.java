@@ -53,16 +53,16 @@ class DepositUseCaseHandlerTest {
     @Test
     void apply_shouldDoSaveAccountWithAddedAmount_whenUserHasAccount() {
         givenUser();
-        givenAmountToDeposit(TEN);
-        givenUserHasAccount();
+        givenAmountToDepositIs10();
+        givenUserHasAccountWithBalance10();
         whenApplyIsInvoked();
-        thenAccountUpdated();
+        thenAccountNewBalanceIs20();
     }
 
     private void givenUserHasNoAccount() {
         given(accountPort.getAccount(any(User.class))).willReturn(Optional.empty());
     }
-    private void givenUserHasAccount() {
+    private void givenUserHasAccountWithBalance10() {
         given(accountPort.getAccount(any(User.class))).willReturn(Optional.of(accountOf10()));
         given(accountPort.saveAccount(accountCaptor.capture())).willReturn(Optional.of(new Account(now(), ZERO, ZERO, user1())));
 
@@ -75,8 +75,8 @@ class DepositUseCaseHandlerTest {
         return new User("user1");
     }
 
-    private void givenAmountToDeposit(BigDecimal val) {
-        this.amount = val;
+    private void givenAmountToDepositIs10() {
+        this.amount = TEN;
     }
     private void whenApplyIsInvoked() {
         handler.apply(user, amount);
@@ -85,7 +85,7 @@ class DepositUseCaseHandlerTest {
     private void thenNoAccountUpdated() {
         verify(accountPort, never()).saveAccount(any(Account.class));
     }
-    private void thenAccountUpdated() {
+    private void thenAccountNewBalanceIs20() {
         var accountArg = accountCaptor.getValue();
         assertEquals(amount, accountArg.getAmount());
         var newBalance = accountOf10().getBalance().add(amount);

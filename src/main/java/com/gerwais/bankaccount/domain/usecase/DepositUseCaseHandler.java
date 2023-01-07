@@ -3,13 +3,14 @@ package com.gerwais.bankaccount.domain.usecase;
 import com.gerwais.bankaccount.domain.model.Account;
 import com.gerwais.bankaccount.domain.model.User;
 import com.gerwais.bankaccount.domain.port.AccountPort;
+import com.gerwais.bankaccount.domain.port.DepositUseCase;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 import static java.time.LocalDateTime.now;
 
-public class DepositUseCaseHandler {
+public class DepositUseCaseHandler implements DepositUseCase {
 
     AccountPort accountPort;
 
@@ -17,7 +18,8 @@ public class DepositUseCaseHandler {
         this.accountPort = accountPort;
     }
 
-    void apply(User user, BigDecimal amount) {
+    @Override
+    public void apply(User user, BigDecimal amount) {
         Optional<Account> account = accountPort.getAccount(user);
         if(account.isEmpty())
             return;
