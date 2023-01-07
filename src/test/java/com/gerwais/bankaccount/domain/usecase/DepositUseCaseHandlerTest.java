@@ -32,7 +32,9 @@ class DepositUseCaseHandlerTest {
     private void givenUserHasNoAccount() {
         given(accountRepository.getAccount(any(User.class))).willReturn(Optional.empty());
     }
-
+    private void givenUser() {
+        user = new User("user1");
+    }
     private void whenApplyIsInvoked() {
         handler.apply(user);
     }
