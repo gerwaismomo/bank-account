@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 
 public class DepositUseCaseHandler implements DepositUseCase {
 
-    AccountPort accountPort;
+    private AccountPort accountPort;
 
     public DepositUseCaseHandler(AccountPort accountPort) {
         this.accountPort = accountPort;
