@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 
 public class WithdrawUseCaseHandler implements WithdrawUseCase {
 
-    private AccountPort accountPort;
+    private final AccountPort accountPort;
 
     public WithdrawUseCaseHandler(AccountPort accountPort) {
         this.accountPort = accountPort;
