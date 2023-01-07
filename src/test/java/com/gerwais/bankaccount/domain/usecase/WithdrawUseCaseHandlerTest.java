@@ -69,12 +69,35 @@ class WithdrawUseCaseHandlerTest {
     private void givenUserHasNoAccount() {
         given(accountPort.getAccount(any(User.class))).willReturn(Optional.empty());
     }
+
+    private void givenUserHasAccountWithBalance10() {
+        given(accountPort.getAccount(any(User.class))).willReturn(Optional.of(accountOf10()));
+        given(accountPort.saveAccount(accountCaptor.capture())).willReturn(Optional.of(new Account(now(), ZERO, ZERO, user1())));
+
+    }
+
+    private void givenAmountToWithdrawIs10() {
+        this.amount = TEN;
+    }
+
+
     private void whenApplyIsInvoked() {
         handler.apply(user, amount);
     }
 
     private void thenNoAccountUpdated() {
         verify(accountPort, never()).saveAccount(any(Account.class));
+    }
+
+    private void thenAccountNewBalanceIs0() {
+        var accountArg = accountCaptor.getValue();
+        assertEquals(amount, accountArg.getAmount());
+        assertEquals(ZERO, accountArg.getBalance());
+
+    }
+
+    private Account accountOf10() {
+        return new Account(now(), ZERO, TEN, user1());
     }
 
 }
