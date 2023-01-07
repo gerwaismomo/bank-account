@@ -19,12 +19,21 @@ class DepositUseCaseHandlerTest {
     AccountRepository accountRepository;
     DepositUseCaseHandler handler;
 
+    private User user;
+
+
     @Test
     void apply_shouldDoNothing_whenUserHasNoAccount() {
+        givenUser();
         givenUserHasNoAccount();
+        whenApplyIsInvoked();
     }
 
     private void givenUserHasNoAccount() {
         given(accountRepository.getAccount(any(User.class))).willReturn(Optional.empty());
+    }
+
+    private void whenApplyIsInvoked() {
+        handler.apply(user);
     }
 }
