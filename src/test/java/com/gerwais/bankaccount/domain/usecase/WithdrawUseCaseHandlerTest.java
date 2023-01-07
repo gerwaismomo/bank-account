@@ -91,7 +91,7 @@ class WithdrawUseCaseHandlerTest {
 
     private void thenAccountNewBalanceIs0() {
         var accountArg = accountCaptor.getValue();
-        assertEquals(amount, accountArg.getAmount());
+        assertEquals(amount.negate(), accountArg.getAmount());
         assertEquals(ZERO, accountArg.getBalance());
 
     }
