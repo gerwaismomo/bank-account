@@ -6,8 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class HistoryAccountHandlerTest {
+public class HistoryAccountUsecaseHandlerTest {
 
+    HistoryAccountUsecaseHandler handler;
 
     private User user;
 
@@ -21,7 +22,13 @@ public class HistoryAccountHandlerTest {
         user = user1();
     }
 
+    private void whenApplyIsInvoked() {
+        handler.apply(user);
+    }
+
     private User user1() {
         return new User("user1");
     }
+
+
 }
