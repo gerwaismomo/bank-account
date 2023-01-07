@@ -49,6 +49,15 @@ class WithdrawUseCaseHandlerTest {
         thenNoAccountUpdated();
     }
 
+    @Test
+    void apply_shouldSaveAccountWithWithdrawedAmount_whenUserHasAccount() {
+        givenUser();
+        givenAmountToWithdrawIs10();
+        givenUserHasAccountWithBalance10();
+        whenApplyIsInvoked();
+        thenAccountNewBalanceIs0();
+    }
+
     private void givenUser() {
         user = user1();
     }
