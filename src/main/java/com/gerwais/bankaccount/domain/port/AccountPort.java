@@ -5,6 +5,7 @@ import com.gerwais.bankaccount.domain.model.User;
 
 import java.util.Optional;
 
-public interface AccountRepository {
+public interface AccountPort {
     Optional<Account> getAccount(User user);
+    Optional<Account> saveAccount(Account account);
 }

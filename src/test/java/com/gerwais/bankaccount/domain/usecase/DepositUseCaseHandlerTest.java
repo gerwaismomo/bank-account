@@ -2,7 +2,8 @@ package com.gerwais.bankaccount.domain.usecase;
 
 import com.gerwais.bankaccount.domain.model.Account;
 import com.gerwais.bankaccount.domain.model.User;
-import com.gerwais.bankaccount.domain.port.AccountRepository;
+import com.gerwais.bankaccount.domain.port.AccountPort;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,10 +20,15 @@ import static org.mockito.Mockito.verify;
 class DepositUseCaseHandlerTest {
 
     @Mock
-    AccountRepository accountRepository;
+    AccountPort accountPort;
     DepositUseCaseHandler handler;
 
     private User user;
+
+    @BeforeEach
+    void init() {
+        handler = new DepositUseCaseHandler(accountPort);
+    }
 
 
     @Test
@@ -34,7 +40,7 @@ class DepositUseCaseHandlerTest {
     }
 
     private void givenUserHasNoAccount() {
-        given(accountRepository.getAccount(any(User.class))).willReturn(Optional.empty());
+        given(accountPort.getAccount(any(User.class))).willReturn(Optional.empty());
     }
     private void givenUser() {
         user = new User("user1");
@@ -44,6 +50,6 @@ class DepositUseCaseHandlerTest {
     }
 
     private void thenNoAccountUpdated() {
-        verify(accountRepository, never()).saveAccount(any(Account.class));
+        verify(accountPort, never()).saveAccount(any(Account.class));
     }
 }
