@@ -39,6 +39,15 @@ class DepositUseCaseHandlerTest {
         thenNoAccountUpdated();
     }
 
+    @Test
+    void apply_shouldDoSaveAccountWithAddedAmount_whenUserHasAccount() {
+        givenUser();
+        givenAmountToDeposit();
+        givenUserHasAccount();
+        whenApplyIsInvoked();
+        thenNoAccountUpdated();
+    }
+
     private void givenUserHasNoAccount() {
         given(accountPort.getAccount(any(User.class))).willReturn(Optional.empty());
     }
