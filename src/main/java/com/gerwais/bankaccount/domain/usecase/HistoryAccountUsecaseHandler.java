@@ -36,6 +36,7 @@ public class HistoryAccountUsecaseHandler implements HistoryAccountUsecase {
 
     private HistoricAccount toHistoric(Account account) {
         var operation = account.getAmount().compareTo(ZERO) < 0 ? WITHDRAW : DEPOSIT;
-        return new HistoricAccount(operation, account.getDate(), account.getAmount(), account.getBalance());
+        var amount = account.getAmount().compareTo(ZERO) < 0 ? account.getAmount().negate() : account.getAmount();
+        return new HistoricAccount(operation, account.getDate(), amount, account.getBalance());
     }
 }

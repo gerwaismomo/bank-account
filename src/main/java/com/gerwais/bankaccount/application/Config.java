@@ -18,22 +18,22 @@ import java.util.Optional;
 public class Config {
 
     @Bean
-    public DepositUseCase depositUseCase() {
-        return new DepositUseCaseHandler(accountPort());
+    public DepositUseCase depositUseCase(AccountPort accountPort) {
+        return new DepositUseCaseHandler(accountPort);
     }
 
     @Bean
-    public WithdrawUseCase withdrawUseCase() {
-        return new WithdrawUseCaseHandler(accountPort());
+    public WithdrawUseCase withdrawUseCase(AccountPort accountPort) {
+        return new WithdrawUseCaseHandler(accountPort);
     }
 
     @Bean
-    public HistoryAccountUsecase historyAccountUsecase() {
-        return new HistoryAccountUsecaseHandler(historyAccountPort());
+    public HistoryAccountUsecase historyAccountUsecase(HistoryAccountPort historyAccountPort) {
+        return new HistoryAccountUsecaseHandler(historyAccountPort);
     }
 
 
-    private AccountPort accountPort() {
+    /*private AccountPort accountPort() {
         return new AccountPort() {
             @Override
             public Optional<Account> getAccount(User user) {
@@ -54,5 +54,5 @@ public class Config {
                 return List.of();
             }
         };
-    }
+    }*/
 }

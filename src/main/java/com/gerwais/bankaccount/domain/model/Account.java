@@ -11,6 +11,7 @@ public class Account implements Serializable {
     private BigDecimal amount;
     private BigDecimal balance;
 
+
     public Account() {
     }
 

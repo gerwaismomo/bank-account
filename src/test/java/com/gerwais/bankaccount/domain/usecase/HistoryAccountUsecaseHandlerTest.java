@@ -82,7 +82,7 @@ public class HistoryAccountUsecaseHandlerTest {
     private List<HistoricAccount> sortedHistoric() {
         var account1 = new HistoricAccount(DEPOSIT, now, TEN, TEN);
         var account2 = new HistoricAccount(DEPOSIT, now.plusHours(1), TEN, BigDecimal.valueOf(20));
-        var account3 = new HistoricAccount(WITHDRAW, now.plusHours(2), TEN.negate(), TEN);
+        var account3 = new HistoricAccount(WITHDRAW, now.plusHours(2), TEN, TEN);
         return List.of(account1, account2, account3);
     }
 }
