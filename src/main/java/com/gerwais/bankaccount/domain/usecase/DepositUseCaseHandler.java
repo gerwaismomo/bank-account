@@ -19,13 +19,13 @@ public class DepositUseCaseHandler implements DepositUseCase {
     }
 
     @Override
-    public void apply(User user, BigDecimal amount) {
+    public Optional<Account> apply(User user, BigDecimal amount) {
         Optional<Account> account = accountPort.getAccount(user);
         if (account.isEmpty())
-            return;
+            return Optional.empty();
 
         var newBalance = account.get().getBalance().add(amount);
         var newAccount = new Account(now(), amount, newBalance, user);
-        accountPort.saveAccount(newAccount);
+        return Optional.of(accountPort.saveAccount(newAccount));
     }
 }

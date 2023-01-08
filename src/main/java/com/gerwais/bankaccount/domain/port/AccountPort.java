@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AccountPort {
     Optional<Account> getAccount(User user);
-    Optional<Account> saveAccount(Account account);
+    Account saveAccount(Account account);
 }

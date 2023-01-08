@@ -6,16 +6,19 @@ import java.util.Objects;
 
 public class HistoricAccount {
 
-    private final Operation operation;
-    private final LocalDateTime date;
-    private final BigDecimal amount;
-    private final BigDecimal balance;
+    private Operation operation;
+    private LocalDateTime date;
+    private BigDecimal amount;
+    private BigDecimal balance;
 
     public HistoricAccount(Operation operation, LocalDateTime date, BigDecimal amount, BigDecimal balance) {
         this.operation = operation;
         this.date = date;
         this.amount = amount;
         this.balance = balance;
+    }
+
+    public HistoricAccount() {
     }
 
     public Operation getOperation() {

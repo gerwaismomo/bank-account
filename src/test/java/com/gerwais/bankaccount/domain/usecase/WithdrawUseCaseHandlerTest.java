@@ -72,7 +72,7 @@ class WithdrawUseCaseHandlerTest {
 
     private void givenUserHasAccountWithBalance10() {
         given(accountPort.getAccount(any(User.class))).willReturn(Optional.of(accountOf10()));
-        given(accountPort.saveAccount(accountCaptor.capture())).willReturn(Optional.of(new Account(now(), ZERO, ZERO, user1())));
+        given(accountPort.saveAccount(accountCaptor.capture())).willReturn(new Account(now(), ZERO, ZERO, user1()));
 
     }
 

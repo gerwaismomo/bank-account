@@ -4,6 +4,7 @@ import com.gerwais.bankaccount.domain.model.Account;
 import com.gerwais.bankaccount.domain.model.HistoricAccount;
 import com.gerwais.bankaccount.domain.model.User;
 import com.gerwais.bankaccount.domain.port.HistoryAccountPort;
+import com.gerwais.bankaccount.domain.port.HistoryAccountUsecase;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import static com.gerwais.bankaccount.domain.model.Operation.WITHDRAW;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Objects.isNull;
 
-public class HistoryAccountUsecaseHandler {
+public class HistoryAccountUsecaseHandler implements HistoryAccountUsecase {
 
     private final HistoryAccountPort historyAccountPort;
 
@@ -20,6 +21,7 @@ public class HistoryAccountUsecaseHandler {
         this.historyAccountPort = historyAccountPort;
     }
 
+    @Override
     public List<HistoricAccount> apply(User user) {
         if (isNull(user))
             return List.of();

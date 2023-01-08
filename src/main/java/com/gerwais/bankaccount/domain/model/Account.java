@@ -1,14 +1,18 @@
 package com.gerwais.bankaccount.domain.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Account {
+public class Account implements Serializable {
 
-    private final User user;
+    private User user;
     private LocalDateTime date;
     private BigDecimal amount;
     private BigDecimal balance;
+
+    public Account() {
+    }
 
     public Account(LocalDateTime date, BigDecimal amount, BigDecimal balance, User user) {
         this.date = date;
@@ -31,5 +35,21 @@ public class Account {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
